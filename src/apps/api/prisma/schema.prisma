@@ -1,0 +1,58 @@
+// Prisma Client
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Database Connection
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User Model
+
+model User {
+  id        String    @id @default(uuid())
+  name      String
+  email     String    @unique
+  phone     String    @unique
+  password  String
+
+  products  Product[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Category Model
+
+model Category {
+  id        Int       @id @default(autoincrement())
+  name      String    @unique
+  slug      String    @unique
+
+  products  Product[]
+}
+
+// Product Model
+
+model Product {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  price       Int
+  location    String
+  
+  images      String[] 
+
+  userId      String
+  categoryId  Int
+
+  user        User     @relation(fields: [userId], references: [id])
+  category    Category @relation(fields: [categoryId], references: [id])
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
