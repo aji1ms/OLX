@@ -9,6 +9,7 @@ import { clearSelectedProduct, fetchProductByIdThunk } from "../../../redux/slic
 import ProductNotFound from "./not-found";
 
 export default function ProductDetailsPage() {
+    console.log("COMPONENT RENDERING");
     const params = useParams();
     const productId = params.id as string;
     const dispatch = useDispatch<AppDispatch>();
@@ -31,10 +32,6 @@ export default function ProductDetailsPage() {
             setMainImage(selectedProduct.images[0] ?? "");
         }
     }, [selectedProduct]);
-
-    if (!selectedProduct) {
-        return ProductNotFound();
-    }
 
     return (
         <div className="min-h-screen bg-gray-50">
