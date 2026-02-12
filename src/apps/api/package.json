@@ -2,7 +2,7 @@
   "type": "module",
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "start": "node dist/server.ts"
+    "start": "tsx src/server.ts"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
