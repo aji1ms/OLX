@@ -7,7 +7,7 @@ import { AppDispatch, RootState } from "../../../redux/store";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { validateEmail, validateName, validatePassword, validatePhone } from "../../../helper/validation";
-import { registerThunk } from "../../../redux/slices/authSlice";
+import { clearAuthError, registerThunk } from "../../../redux/slices/authSlice";
 
 export default function RegisterPage() {
     const router = useRouter();
@@ -38,6 +38,7 @@ export default function RegisterPage() {
     useEffect(() => {
         if (error) {
             toast.error(error);
+            dispatch(clearAuthError());
         }
     }, [error]);
 

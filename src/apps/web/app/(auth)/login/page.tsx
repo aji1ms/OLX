@@ -6,7 +6,7 @@ import toast from 'react-hot-toast';
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../redux/store";
 import { useRouter } from "next/navigation";
-import { loginThunk } from "../../../redux/slices/authSlice";
+import { clearAuthError, loginThunk } from "../../../redux/slices/authSlice";
 import { validateEmail, validatePassword } from "../../../helper/validation";
 
 export default function LoginPage() {
@@ -26,11 +26,12 @@ export default function LoginPage() {
     const [formError, setFormError] = useState({
         emailError: '',
         passwordError: ''
-    }); 
+    });
 
     useEffect(() => {
         if (error) {
             toast.error(error);
+            dispatch(clearAuthError())
         }
     }, [error]);
 
